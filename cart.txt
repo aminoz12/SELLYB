@@ -1,0 +1,17 @@
+<?php
+session_start();
+
+// Display the contents of the cart
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    echo "<h1>Cart Contents:</h1>";
+    echo "<ul>";
+    foreach ($_SESSION['cart'] as $productId) {
+        // Fetch and display additional product information from the database if needed
+        echo "<li>Product ID: $productId</li>";
+    }
+    echo "</ul>";
+} else {
+    echo "<h1>Cart is empty</h1>";
+}
+?>
+<!-- The rest of your HTML content goes here -->
