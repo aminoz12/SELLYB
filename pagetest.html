@@ -1,0 +1,174 @@
+    <style>
+        .search-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon i {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 6px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 5px 0;
+            z-index: 999;
+        }
+
+        .search-results ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .search-results li {
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+
+        .search-results li:hover {
+            background-color: #e5e5e5;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- Your existing header content -->
+
+        <!-- Search icon with search bar -->
+        <div class="search-icon">
+            <i class="fa fa-search"></i>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+                <div class="search-results"></div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        $(document).ready(function() {
+            var searchInput = $('#search-input');
+            var searchResults = $('.search-results');
+            var debounceTimer;
+
+            searchInput.on('input', function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(fetchResults, 300);
+            });
+
+            function fetchResults() {
+                var query = searchInput.val().trim();
+
+                if (query === '') {
+                    searchResults.empty();
+                    return;
+                }
+
+                $.ajax({
+                    url: '/search',
+                    method: 'GET',
+                    data: { query: query },
+                    success: function(data) {
+                        displayResults(data);
+                    }
+                });
+            }
+
+            function displayResults(results) {
+                searchResults.empty();
+
+                if (results.length === 0) {
+                    searchResults.append('<p>No results found</p>');
+                } else {
+                    var resultList = $('<ul></ul>');
+
+                    results.forEach(function(result) {
+                        resultList.append('<li>' + result + '</li>');
+                    });
+
+                    searchResults.append(resultList);
+                }
+            }
+        });
+    </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var searchInput = $('#search-input');
+
+            searchInput.on('input', function() {
+                var query = searchInput.val().trim().toLowerCase();
+
+                switch (query) {
+                    case 'gucci':
+                        window.location.href = 'GUCCICOLLECTION.HTML';
+                        break;
+                    case 'prada':
+                        window.location.href = 'PRADACOLLECTION.HTML';
+                        break;
+                    case 'chanel':
+                        window.location.href = 'chanel.html';
+                        break;
+                    case 'louis vuitton':
+                        window.location.href = 'LOUISVUITTONCOLLECTION.HTML';
+                        break;
+                    case 'versace':
+                        window.location.href = 'VERSACECOLLECTION.HTML';
+                        break;
+                    case 'dolce & gabbana':
+                        window.location.href = 'DOLCE&GABBANACOLLECTION.HTML';
+                        break;
+                    case 'balenciaga':
+                        window.location.href = 'BALENCIAGACOLLECTION.HTML';
+                        break;
+                    case 'christian dior':
+                        window.location.href = 'CHRISTIANDIORCOLLECTION.HTML';
+                        break;
+                    case 'hermes':
+                        window.location.href = 'HERMESCOLLECTION.HTML';
+                        break;
+                    case 'saint laurent':
+                        window.location.href = 'SAINTLAURENTCOLLECTION.HTML';
+                        break;
+                    default:
+                        // Handle other search queries or display a message
+                        break;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <!-- Your existing header content -->
+
+        <!-- Search icon with search bar -->
+        <div class="search-icon">
+            <i class="fa fa-search"></i>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+            </div>
+        </div>
+    </header>
+</body>

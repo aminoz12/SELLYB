@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predictive Search Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Predictive Search Example</h1>
+    <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+    <div id="search-results"></div>
+
+    <script>
+        $(document).ready(function() {
+            var searchInput = $('#search-input');
+            var searchResults = $('#search-results');
+
+            searchInput.on('input', function() {
+                var query = searchInput.val();
+
+                if (query.trim() !== '') {
+                    $.ajax({
+                        url: '/search',
+                        method: 'GET',
+                        data: { query: query },
+                        success: function(data) {
+                            displayResults(data);
+                        }
+                    });
+                } else {
+                    searchResults.empty();
+                }
+            });
+
+            function displayResults(results) {
+                searchResults.empty();
+
+                if (results.length === 0) {
+                    searchResults.append('<p>No results found</p>');
+                } else {
+                    var resultList = $('<ul></ul>');
+
+                    results.forEach(function(result) {
+                        resultList.append('<li>' + result + '</li>');
+                    });
+
+                    searchResults.append(resultList);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
